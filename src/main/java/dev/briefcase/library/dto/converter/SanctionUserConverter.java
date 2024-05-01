@@ -11,7 +11,7 @@ import dev.briefcase.library.dto.SanctionUserResponseDTO;
 import dev.briefcase.library.entity.LibraryUser;
 import dev.briefcase.library.entity.SanctionUser;
 import dev.briefcase.library.service.LibraryUserService;
-import dev.briefcase.library.tool.Tool;
+import dev.briefcase.library.utils.Utils;
 
 @Component
 public class SanctionUserConverter extends AbstractConverter<SanctionUser, SanctionUserRegisterDTO> {
@@ -38,9 +38,9 @@ public class SanctionUserConverter extends AbstractConverter<SanctionUser, Sanct
 		return SanctionUserRegisterDTO.builder()
 				.idSanction(entity.getIdSanction())
 				.user(entity.getUser().getIdUser())
-				.startDate(Tool.dateToShow(entity.getStartDate()))
-				.completionDate(Tool.dateToShow(entity.getCompletionDate()))
-				.observation(Tool.removeWhiteSpace(entity.getObservation()))
+				.startDate(Utils.dateToShow(entity.getStartDate()))
+				.completionDate(Utils.dateToShow(entity.getCompletionDate()))
+				.observation(Utils.removeWhiteSpace(entity.getObservation()))
 				.build();
 	}
 
@@ -52,9 +52,9 @@ public class SanctionUserConverter extends AbstractConverter<SanctionUser, Sanct
 		return SanctionUser.builder()
 				.idSanction(dto.getIdSanction())
 				.user(new LibraryUser (dto.getUser()))
-				.startDate(Tool.dateToSave(dto.getStartDate()))
-				.completionDate(Tool.dateToSave(dto.getCompletionDate()))
-				.observation(Tool.removeWhiteSpace(dto.getObservation()))
+				.startDate(Utils.dateToSave(dto.getStartDate()))
+				.completionDate(Utils.dateToSave(dto.getCompletionDate()))
+				.observation(Utils.removeWhiteSpace(dto.getObservation()))
 				.build();
 	}
 	
@@ -65,9 +65,9 @@ public class SanctionUserConverter extends AbstractConverter<SanctionUser, Sanct
 		return new SanctionUserResponseDTO(
 				entity.getIdSanction(), 
 				getUser(entity.getUser().getIdUser()),
-				Tool.dateToShow(entity.getStartDate()),
-				Tool.dateToShow(entity.getCompletionDate()), 
-				Tool.removeWhiteSpace(entity.getObservation()),
+				Utils.dateToShow(entity.getStartDate()),
+				Utils.dateToShow(entity.getCompletionDate()), 
+				Utils.removeWhiteSpace(entity.getObservation()),
 				entity.getActive());
 				
 	}

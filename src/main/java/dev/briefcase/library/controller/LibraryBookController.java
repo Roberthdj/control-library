@@ -20,7 +20,7 @@ import dev.briefcase.library.dto.LibraryBookDTO;
 import dev.briefcase.library.dto.converter.LibraryBookConverter;
 import dev.briefcase.library.entity.LibraryBook;
 import dev.briefcase.library.service.LibraryBookService;
-import dev.briefcase.library.tool.DataWrapper;
+import dev.briefcase.library.utils.DataWrapper;
 
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -71,8 +71,9 @@ public class LibraryBookController {
 		}
 
 		List<LibraryBookDTO> response = converter.fromEntity(libraryBooks);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
+
 	}
 
 	@GetMapping(value = "/active")
@@ -91,7 +92,7 @@ public class LibraryBookController {
 		}
 
 		List<LibraryBookDTO> response = converter.fromEntity(libraryBooks);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
@@ -99,7 +100,7 @@ public class LibraryBookController {
 	public ResponseEntity<LibraryBookDTO> findByIsbn(@PathVariable("isbn") String isbn) {
 		LibraryBook register = service.findByIsbn(isbn);
 		LibraryBookDTO response = converter.fromEntity(register);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
@@ -107,7 +108,7 @@ public class LibraryBookController {
 	public ResponseEntity<LibraryBookDTO> findById(@PathVariable("id") Long id) {
 		LibraryBook register = service.findById(id);
 		LibraryBookDTO response = converter.fromEntity(register);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
@@ -115,29 +116,31 @@ public class LibraryBookController {
 	public ResponseEntity<LibraryBookDTO> create(@RequestBody LibraryBookDTO libraryBookDTO) {
 		LibraryBook register = service.save(converter.fromDTO(libraryBookDTO));
 		LibraryBookDTO response = converter.fromEntity(register);
-		//return ResponseEntity.status(HttpStatus.CREATED).body(registerDTO);
+		// return ResponseEntity.status(HttpStatus.CREATED).body(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.CREATED);
 	}
+
 	@PutMapping
 	public ResponseEntity<LibraryBookDTO> update(@RequestBody LibraryBookDTO libraryBookDTO) {
 		LibraryBook register = service.update(converter.fromDTO(libraryBookDTO));
 		LibraryBookDTO response = converter.fromEntity(register);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}/{state}")// state: {true:active}{false:inactive}
-	public ResponseEntity<LibraryBookDTO> logicalDelete(@PathVariable("id") Long id, @PathVariable("state") Boolean state) {
+	@PutMapping("/{id}/{state}") // state: {true:active}{false:inactive}
+	public ResponseEntity<LibraryBookDTO> logicalDelete(@PathVariable("id") Long id,
+			@PathVariable("state") Boolean state) {
 		LibraryBook register = service.logicalDelete(id, state);
 		LibraryBookDTO response = converter.fromEntity(register);
-		//return ResponseEntity.ok(registerDTO);
+		// return ResponseEntity.ok(registerDTO);
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<LibraryBook> delete(@PathVariable("id") Long id) {
 		service.delete(id);
-		//return ResponseEntity.noContent().build();
+		// return ResponseEntity.noContent().build();
 		return new DataWrapper(true, "success", null).createResponse(HttpStatus.NO_CONTENT);
 	}
 }

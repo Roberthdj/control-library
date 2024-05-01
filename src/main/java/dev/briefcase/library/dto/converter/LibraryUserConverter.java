@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import dev.briefcase.library.dto.LibraryUserDTO;
 import dev.briefcase.library.entity.LibraryUser;
-import dev.briefcase.library.tool.Tool;
+import dev.briefcase.library.utils.Utils;
 
 @Component
 public class LibraryUserConverter extends AbstractConverter<LibraryUser, LibraryUserDTO> {
@@ -16,12 +16,12 @@ public class LibraryUserConverter extends AbstractConverter<LibraryUser, Library
 
 		return LibraryUserDTO.builder()
 				.idUser(entity.getIdUser())
-				.firstName(Tool.removeWhiteSpace(entity.getFirstName()))
-				.lastName(Tool.removeWhiteSpace(entity.getLastName()))
-				.identification(Tool.removeWhiteSpace(entity.getIdentification()))
-				.email(Tool.removeWhiteSpace(entity.getEmail()))
-				.phoneNumber(Tool.removeWhiteSpace(entity.getPhoneNumber()))
-				.address(Tool.removeWhiteSpace(entity.getAddress()))
+				.firstName(Utils.removeWhiteSpace(entity.getFirstName()))
+				.lastName(Utils.removeWhiteSpace(entity.getLastName()))
+				.identification(Utils.removeWhiteSpace(entity.getIdentification()))
+				.email(Utils.removeWhiteSpace(entity.getEmail()))
+				.phoneNumber(Utils.removeWhiteSpace(entity.getPhoneNumber()))
+				.address(Utils.removeWhiteSpace(entity.getAddress()))
 				.sanctioned(entity.getSanctioned())
 				.active(entity.getActive())
 				.build();
@@ -34,12 +34,12 @@ public class LibraryUserConverter extends AbstractConverter<LibraryUser, Library
 
 		return LibraryUser.builder()
 				.idUser(dto.getIdUser())
-				.firstName(Tool.removeWhiteSpace(dto.getFirstName()))
-				.lastName(Tool.removeWhiteSpace(dto.getLastName()))
-				.identification(Tool.removeWhiteSpace(dto.getIdentification()))
-				.email(Tool.removeWhiteSpace(dto.getEmail()))
-				.phoneNumber(Tool.removeWhiteSpace(dto.getPhoneNumber()))
-				.address(Tool.removeWhiteSpace(dto.getAddress()))
+				.firstName(Utils.removeWhiteSpace(dto.getFirstName()))
+				.lastName(Utils.removeWhiteSpace(dto.getLastName()))
+				.identification(Utils.removeWhiteSpace(dto.getIdentification()))
+				.email(Utils.removeWhiteSpace(dto.getEmail()))
+				.phoneNumber(Utils.removeWhiteSpace(dto.getPhoneNumber()))
+				.address(Utils.removeWhiteSpace(dto.getAddress()))
 				.sanctioned(dto.getSanctioned())
 				.active(dto.getActive())
 				.build();

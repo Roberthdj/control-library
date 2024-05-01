@@ -22,7 +22,7 @@ import dev.briefcase.library.dto.SanctionUserResponseDTO;
 import dev.briefcase.library.dto.converter.SanctionUserConverter;
 import dev.briefcase.library.entity.SanctionUser;
 import dev.briefcase.library.service.SanctionUserService;
-import dev.briefcase.library.tool.DataWrapper;
+import dev.briefcase.library.utils.DataWrapper;
 
 @RestController
 @RequestMapping("/service/sanction")

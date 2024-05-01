@@ -21,7 +21,7 @@ import dev.briefcase.library.dto.LibraryUserDTO;
 import dev.briefcase.library.dto.converter.LibraryUserConverter;
 import dev.briefcase.library.entity.LibraryUser;
 import dev.briefcase.library.service.LibraryUserService;
-import dev.briefcase.library.tool.DataWrapper;
+import dev.briefcase.library.utils.DataWrapper;
 
 @RestController
 @RequestMapping("/service/user")

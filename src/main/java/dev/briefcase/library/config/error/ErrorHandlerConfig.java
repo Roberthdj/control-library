@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import dev.briefcase.library.config.exception.GeneralServiceException;
 import dev.briefcase.library.config.exception.NotFoundException;
 import dev.briefcase.library.config.exception.ValidateFieldsException;
-import dev.briefcase.library.tool.DataWrapper;
+import dev.briefcase.library.utils.DataWrapper;
 
 @RestControllerAdvice
 public class ErrorHandlerConfig extends ResponseEntityExceptionHandler {

@@ -1,5 +1,5 @@
 
-package dev.briefcase.library.tool;
+package dev.briefcase.library.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Date;
 import dev.briefcase.library.config.exception.GeneralServiceException;
 import dev.briefcase.library.config.exception.ValidateFieldsException;
 
-public class Tool {
+public class Utils {
 
 	public static String dateToShow(Date date) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

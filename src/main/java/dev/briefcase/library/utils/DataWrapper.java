@@ -1,4 +1,4 @@
-package dev.briefcase.library.tool;
+package dev.briefcase.library.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DataWrapper<T> {
-	
+
 	private Boolean done;
 	private String message;
 	private T body;
-	
-	public ResponseEntity<DataWrapper<T>> createResponse(){
-		return new ResponseEntity<>(this, HttpStatus.OK);		
+
+	public ResponseEntity<DataWrapper<T>> createResponse() {
+		return new ResponseEntity<>(this, HttpStatus.OK);
 	}
-	
-	public ResponseEntity<DataWrapper<T>> createResponse(HttpStatus status){
-		return new ResponseEntity<>(this, status);		
+
+	public ResponseEntity<DataWrapper<T>> createResponse(HttpStatus status) {
+		return new ResponseEntity<>(this, status);
 	}
 
 }

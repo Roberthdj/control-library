@@ -23,7 +23,7 @@ import dev.briefcase.library.dto.converter.LoanBookConverter;
 import dev.briefcase.library.entity.LibraryUser;
 import dev.briefcase.library.entity.LoanBook;
 import dev.briefcase.library.service.LoanBookService;
-import dev.briefcase.library.tool.DataWrapper;
+import dev.briefcase.library.utils.DataWrapper;
 
 @RestController
 @RequestMapping("/service/loan")

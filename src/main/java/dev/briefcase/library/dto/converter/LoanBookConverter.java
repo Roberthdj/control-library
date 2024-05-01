@@ -14,7 +14,7 @@ import dev.briefcase.library.entity.LibraryUser;
 import dev.briefcase.library.entity.LoanBook;
 import dev.briefcase.library.service.LibraryBookService;
 import dev.briefcase.library.service.LibraryUserService;
-import dev.briefcase.library.tool.Tool;
+import dev.briefcase.library.utils.Utils;
 
 @Component
 public class LoanBookConverter extends AbstractConverter<LoanBook, LoanBookRegisterDTO> {
@@ -54,8 +54,8 @@ public class LoanBookConverter extends AbstractConverter<LoanBook, LoanBookRegis
 				.idLoan(entity.getIdLoan())
 				.book(entity.getBook().getIdBook())
 				.user(entity.getUser().getIdUser())
-				.departureDate(Tool.dateToShow(entity.getDepartureDate()))
-				.returnDate(Tool.dateToShow(entity.getReturnDate()))
+				.departureDate(Utils.dateToShow(entity.getDepartureDate()))
+				.returnDate(Utils.dateToShow(entity.getReturnDate()))
 				.observation(entity.getObservation())
 				.build();
 	}
@@ -69,9 +69,9 @@ public class LoanBookConverter extends AbstractConverter<LoanBook, LoanBookRegis
 				.idLoan(dto.getIdLoan())
 				.user(new LibraryUser(dto.getUser()))
 				.book(new LibraryBook(dto.getBook()))
-				.departureDate(Tool.dateToSave(dto.getDepartureDate()))
-				.returnDate(Tool.dateToSave(dto.getReturnDate()))
-				.observation(Tool.removeWhiteSpace(dto.getObservation()))
+				.departureDate(Utils.dateToSave(dto.getDepartureDate()))
+				.returnDate(Utils.dateToSave(dto.getReturnDate()))
+				.observation(Utils.removeWhiteSpace(dto.getObservation()))
 				.build();
 	}
 
@@ -83,9 +83,9 @@ public class LoanBookConverter extends AbstractConverter<LoanBook, LoanBookRegis
 				entity.getIdLoan(), 
 				getSelectedUser(entity.getUser().getIdUser()),
 				getSelectedBook(entity.getBook().getIdBook()), 
-				Tool.dateToShow(entity.getDepartureDate()),
-				Tool.dateToShow(entity.getReturnDate()), 
-				Tool.removeWhiteSpace(entity.getObservation()), 
+				Utils.dateToShow(entity.getDepartureDate()),
+				Utils.dateToShow(entity.getReturnDate()), 
+				Utils.removeWhiteSpace(entity.getObservation()), 
 				entity.getActive());
 	}
 
