@@ -5,8 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dev.briefcase.library.config.exception.GeneralServiceException;
-import dev.briefcase.library.config.exception.ValidateFieldsException;
+import dev.briefcase.library.error.exception.GeneralServiceException;
+import dev.briefcase.library.error.exception.ValidateFieldsException;
 
 public class Utils {
 

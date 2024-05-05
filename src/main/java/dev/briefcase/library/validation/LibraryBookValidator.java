@@ -2,8 +2,8 @@ package dev.briefcase.library.validation;
 
 import org.springframework.stereotype.Component;
 
-import dev.briefcase.library.config.exception.ValidateFieldsException;
-import dev.briefcase.library.entity.LibraryBook;
+import dev.briefcase.library.core.entity.LibraryBook;
+import dev.briefcase.library.error.exception.ValidateFieldsException;
 
 @Component
 public class LibraryBookValidator {

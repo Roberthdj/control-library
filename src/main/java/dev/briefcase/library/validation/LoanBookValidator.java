@@ -2,8 +2,8 @@ package dev.briefcase.library.validation;
 
 import org.springframework.stereotype.Component;
 
-import dev.briefcase.library.config.exception.ValidateFieldsException;
-import dev.briefcase.library.entity.LoanBook;
+import dev.briefcase.library.core.entity.LoanBook;
+import dev.briefcase.library.error.exception.ValidateFieldsException;
 
 @Component
 public class LoanBookValidator {
@@ -25,6 +25,8 @@ public class LoanBookValidator {
 		if (loanBook.getReturnDate() == null) {
 			throw new ValidateFieldsException("Return date is required.");
 		}
+		
+		validateDate(loanBook);
 
 		if (loanBook.getObservation() == null || loanBook.getObservation().isBlank()) {
 			throw new ValidateFieldsException("Observation is required");
@@ -32,7 +34,7 @@ public class LoanBookValidator {
 
 		if (loanBook.getObservation().length() > 100) {
 			throw new ValidateFieldsException("Observation too long.");
-		}
+		}		
 
 	}
 
@@ -46,6 +48,14 @@ public class LoanBookValidator {
 		if (loanBook.getIdLoan()== null) {
 			throw new ValidateFieldsException("Loan ID is required.");
 		}
+		
+		validateDate(loanBook);
+	}
+	
+	private void validateDate(LoanBook loanBook) {
+		if( loanBook.getDepartureDate().after(loanBook.getReturnDate()) || loanBook.getDepartureDate().equals(loanBook.getReturnDate())) {
+			throw new ValidateFieldsException("Invalid date input!");
+		}		
 	}
 
 }
