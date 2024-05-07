@@ -7,6 +7,7 @@
 <p align="justify"> CONTROL LIBRARY es una API desarrollada con Spring Boot con la finalidad de realizar trabajo practico de programación backend, e ir ganando experiencia en el uso de las tecnologias y conceptos usados en su desarrollo.</p>
 
 <p align="justify"> Esta API se encarga de controlar el prestamo de libros en una biblioteca, asi como las sanciones relacionadas a los usuarios que no cumplen con la devolución de los libros en el tiempo estipulado.</p>
+
 ---
 
 ## INDICE
@@ -41,18 +42,38 @@
 
 ## INSTRUCCIONES DE INSTALACION
 
-clonar repositorio
-eclipse
-    archivo
-    importar
-    Maven
-    
+- [Clonar el repositorio desde github.](https://docs.github.com/es/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+- [Importar el proyecto maven en eclipse.](https://chuidiang.org/index.php?title=Crear_proyecto_Maven_en_Eclipse#Importar_un_proyecto_maven_existente_en_Eclipse)
+
+- Crear la base de datos (Schema) vacia en MySQL.
+
+    ``` SQL
+        CREATE DATABASE db_library;
+        USE db_library;
+    ```      
+    > Las tablas y otras estructuras se crearán al ejecutar la aplicación.
+- Configurar las variables de entorno  
+
+    - Menu **~>** Run **~>** Run Configurations **~>** seleccionar Environment **~>** Add
+
+        > DBNAME = db_library
+        > DBUSER = usuario de la base de datos 
+        > DBPASS = password de la base de datos   
+        > DBPORT = número del puerto (8080, 80xx)
+        > DBURL = 127.0.0.1:3306 ó localhost
+        > SECRET_KEY =  hash de 256 bits
+
+- Correr la aplicación desde eclipse.
+    - Explorador de proyectos **~>** clic derecho sobre control-library **~>** Run As **~>** Spring Boot App
 
 <sub>[Volver al índice](#indice)</sub>
 
 ---
 
 ## INSTRUCCIONES DE USO
+
+### [Ver uso de la aplicación »](/USE.md)
 
 <sub>[Volver al índice](#indice)</sub>
 
