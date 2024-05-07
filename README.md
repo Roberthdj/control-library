@@ -32,9 +32,9 @@
 
 ||||
 |:---:|:---:|:---:|
-|<a href="https://jdk.java.net/archive/" target=blank>**OpenJDK 17**</a>|<a href="https://www.eclipse.org/downloads/packages/release/2023-12/r" target=blank>**Eclipse 2023-12**</a>|<a href="https://spring.io/projects/spring-boot#overview" target=blank>**Spring Boot**</a>|
-|<a href="https://code.visualstudio.com/download" target=blank>**Visual Studio Code**</a>|<a href="https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client" target=blank>**Thunder Client Ext. VSC**</a>|<a href="https://dev.mysql.com/downloads/mysql/8.0.html" target=blank>**Workbech 8.0**</a>|
-||<a href="https://dev.mysql.com/downloads/mysql/8.0.html" target=blank>**MySQL 8.0**</a>||
+|<a href="https://jdk.java.net/archive/" target="blank" rel="noopener noreferrer">**OpenJDK 17**</a>|<a href="https://www.eclipse.org/downloads/packages/release/2023-12/r" target="blank" rel="noopener noreferrer">**Eclipse 2023-12**</a>|<a href="https://spring.io/projects/spring-boot#overview" target="blank" rel="noopener noreferrer">**Spring Boot**</a>|
+|<a href="https://code.visualstudio.com/download" target="blank" rel="noopener noreferrer">**Visual Studio Code**</a>|<a href="https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client" target="blank" rel="noopener noreferrer">**Thunder Client Ext. VSC**</a>|<a href="https://dev.mysql.com/downloads/mysql/8.0.html" target="blank" rel="noopener noreferrer">**Workbech 8.0**</a>|
+||<a href="https://dev.mysql.com/downloads/mysql/8.0.html" target="blank" rel="noopener noreferrer">**MySQL 8.0**</a>||
 
 <sub>[Volver al índice](#indice)</sub>
 
@@ -42,9 +42,9 @@
 
 ## INSTRUCCIONES DE INSTALACION
 
-- <a href="https://docs.github.com/es/repositories/creating-and-managing-repositories/cloning-a-repository" target=blank>Clonar el repositorio desde github.</a>
+- <a href="https://docs.github.com/es/repositories/creating-and-managing-repositories/cloning-a-repository" target="blank" rel="noopener noreferrer">Clonar el repositorio desde github.</a>
 
-- <a href="https://chuidiang.org/index.php?title=Crear_proyecto_Maven_en_Eclipse#Importar_un_proyecto_maven_existente_en_Eclipse" target=blank>Importar el proyecto maven en eclipse.</a>
+- <a href="https://chuidiang.org/index.php?title=Crear_proyecto_Maven_en_Eclipse#Importar_un_proyecto_maven_existente_en_Eclipse" target="blank" rel="noopener noreferrer">Importar el proyecto maven en eclipse.</a>
 
 - Crear la base de datos (Schema) vacia en MySQL.
 
