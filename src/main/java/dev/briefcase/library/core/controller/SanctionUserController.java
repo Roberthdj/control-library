@@ -94,7 +94,7 @@ public class SanctionUserController {
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/{id}/{state}") // state: {true:active}{false:inactive}
+	@DeleteMapping(value = "/{id}/{state}") // state: {1/true:active}{0/false:inactive}
 	public ResponseEntity<SanctionUserResponseDTO> logicalDelete(@PathVariable("id") Long id, @PathVariable("state") Boolean state) {
 		SanctionUser register = service.logicalDelete(id, state);
 		SanctionUserResponseDTO response = converter.createResponse(register);

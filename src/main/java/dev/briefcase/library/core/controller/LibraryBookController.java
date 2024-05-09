@@ -128,7 +128,7 @@ public class LibraryBookController {
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}/{state}") // state: {true:active}{false:inactive}
+	@DeleteMapping("/{id}/{state}") // state: {1/true:active}{0/false:inactive}
 	public ResponseEntity<LibraryBookDTO> logicalDelete(@PathVariable("id") Long id,
 			@PathVariable("state") Boolean state) {
 		LibraryBook register = service.logicalDelete(id, state);

@@ -17,7 +17,9 @@ import dev.briefcase.library.error.exception.GeneralServiceException;
 import dev.briefcase.library.error.exception.NotFoundException;
 import dev.briefcase.library.error.exception.ValidateFieldsException;
 import dev.briefcase.library.validation.LoanBookValidator;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class LoanBookServiceImpl implements LoanBookService {
 
@@ -64,9 +66,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findAll(page).toList();
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -76,9 +80,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIdUser(user, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -88,9 +94,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIdBook(book, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -99,9 +107,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIdentificationUser(idf, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -110,9 +120,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIsbnBook(isbn, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -122,9 +134,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIdUserAndIdBook(user, book, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 	
@@ -134,9 +148,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			return repositoryLoan.findByIdfAndIsbn(idf, isbn, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -147,9 +163,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 			return repositoryLoan.findById(id)
 					.orElseThrow(() -> new NotFoundException("Loan with ID " + id + " does not exist."));
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -167,9 +185,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 			LoanBook register = repositoryLoan.save(loanBook);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -207,9 +227,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 			return register;
 
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 	
@@ -228,9 +250,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 			
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -244,10 +268,11 @@ public class LoanBookServiceImpl implements LoanBookService {
 			verifyBookAndprocessLoan(register.getBook().getIdBook(), false, false);
 			repositoryLoan.delete(register);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
-
 	}
 }

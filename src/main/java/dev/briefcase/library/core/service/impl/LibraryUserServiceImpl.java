@@ -14,7 +14,9 @@ import dev.briefcase.library.error.exception.GeneralServiceException;
 import dev.briefcase.library.error.exception.NotFoundException;
 import dev.briefcase.library.error.exception.ValidateFieldsException;
 import dev.briefcase.library.validation.LibraryUserValidator;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class LibraryUserServiceImpl implements LibraryUserService {
 
@@ -50,9 +52,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findAll(page).toList();
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -62,9 +66,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findByFirstNameContaining(firstName, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -74,9 +80,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findByLastNameContaining(lastName, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -87,9 +95,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findByFirstNameContainingAndLastNameContaining(firstName, lastName, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -99,9 +109,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findBySanctioned(sanctioned, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -111,9 +123,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findByActive(actived, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -122,9 +136,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.findByActiveAndSanctioned(actived, sanctioned, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -138,9 +154,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			LibraryUser register = repositoryUser.findByIdentification(identification);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -149,9 +167,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		try {
 			return repositoryUser.existsByIdentification(identification);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -163,9 +183,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 					.orElseThrow(() -> new NotFoundException("User ID " + id + " does not exist."));
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -185,9 +207,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			LibraryUser register = repositoryUser.save(libraryUser);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -238,9 +262,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			return register;
 
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -261,9 +287,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -278,9 +306,11 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 
 			repositoryUser.delete(register);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 }

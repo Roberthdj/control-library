@@ -15,7 +15,9 @@ import dev.briefcase.library.error.exception.GeneralServiceException;
 import dev.briefcase.library.error.exception.NotFoundException;
 import dev.briefcase.library.error.exception.ValidateFieldsException;
 import dev.briefcase.library.validation.LibraryBookValidator;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class LibraryBookServiceImpl implements LibraryBookService {
 
@@ -46,9 +48,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findAll(page).toList();
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -58,9 +62,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findByTitleContaining(title, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -70,9 +76,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findByAuthorContaining(author, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -82,9 +90,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findByTitleContainingAndAuthorContaining(title, author, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -94,9 +104,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findByActive(actived, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -106,9 +118,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.findByLent(lent, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -122,9 +136,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			LibraryBook register = repositoryBook.findByIsbn(isbn);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -133,9 +149,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		try {
 			return repositoryBook.existsByIsbn(isbn);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -147,9 +165,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 					.orElseThrow(() -> new NotFoundException("Book ID " + id + " does not exist."));
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -168,9 +188,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			LibraryBook register = repositoryBook.save(libraryBook);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -212,9 +234,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			return register;
 
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -235,9 +259,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 
@@ -252,9 +278,11 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 
 			repositoryBook.delete(register);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
 		}
 	}
 }

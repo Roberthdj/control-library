@@ -134,7 +134,7 @@ public class LibraryUserController {
 		return new DataWrapper(true, "success", response).createResponse(HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/{id}/{state}") // state: {true:active}{false:inactive}
+	@DeleteMapping(value = "/{id}/{state}") // state: {1/true:active}{0/false:inactive}
 	public ResponseEntity<LibraryUserDTO> logicalDelete(@PathVariable("id") Long id, @PathVariable("state") Boolean state) {
 		LibraryUser register = service.logicalDelete(id, state);
 		LibraryUserDTO response = converter.fromEntity(register);

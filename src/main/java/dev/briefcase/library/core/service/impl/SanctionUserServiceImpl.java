@@ -15,7 +15,9 @@ import dev.briefcase.library.error.exception.GeneralServiceException;
 import dev.briefcase.library.error.exception.NotFoundException;
 import dev.briefcase.library.error.exception.ValidateFieldsException;
 import dev.briefcase.library.validation.SanctionUserValidator;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class SanctionUserServiceImpl implements SanctionUserService {
 
@@ -46,9 +48,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 		try {
 			return repositorySanction.findAll(page).toList();
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -58,9 +62,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 		try {
 			return repositorySanction.findByIdUser(user, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -70,9 +76,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 		try {
 			return repositorySanction.findByIdentificationUser(idf, page);
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -83,9 +91,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 			return repositorySanction.findById(id)
 					.orElseThrow(() -> new NotFoundException("Sanction with ID " + id + " does not exist."));
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -102,9 +112,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 			SanctionUser register = repositorySanction.save(sanctionUser);
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -139,9 +151,11 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 			return register;
 
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -161,20 +175,30 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 
 			return register;
 		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
-			throw new GeneralServiceException(e.getMessage());
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		SanctionUser register = repositorySanction.findById(id)
-				.orElseThrow(() -> new NotFoundException("Sanction with ID " + id + " does not exist."));
+		try {
+			SanctionUser register = repositorySanction.findById(id)
+					.orElseThrow(() -> new NotFoundException("Sanction with ID " + id + " does not exist."));
 
-		processSanction(register.getUser().getIdUser(), false, false);
-		register.getUser().deactivateSanction();
-		repositorySanction.delete(register);
+			processSanction(register.getUser().getIdUser(), false, false);
+			register.getUser().deactivateSanction();
+			repositorySanction.delete(register);
+		} catch (NotFoundException | ValidateFieldsException e) {
+			log.info(e.getMessage(), e);
+			throw e;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new GeneralServiceException(e.getMessage(),e);
+		}
 	}
 }
