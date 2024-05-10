@@ -201,10 +201,12 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 	private void processSanction(Long user, Boolean sanctionStatus, Boolean generateSanction) {
 		LibraryUser registerUser = repositoryUser.findById(user)
 				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
+		
 		if (registerUser.getSanctioned().equals(true) && generateSanction.equals(true)) {
 			throw new GeneralServiceException(
 					"The user with ID " + registerUser.getIdUser() + " has already been sanctioned.");
 		}
+		
 		registerUser.setSanctioned(sanctionStatus);
 	}
 }

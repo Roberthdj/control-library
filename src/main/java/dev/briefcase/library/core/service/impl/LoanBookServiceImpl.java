@@ -260,6 +260,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 	private void verifyUser(Long user) {
 		LibraryUser registerUser = repositoryUser.findById(user)
 				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
+		
 		if (registerUser.getSanctioned().equals(true) || registerUser.getActive().equals(false)) {
 			throw new GeneralServiceException(
 					"The user with ID " + registerUser.getIdUser() + " has been sanctioned or is not active.");
