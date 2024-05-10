@@ -156,11 +156,9 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 					.orElseThrow(() -> new NotFoundException("Sanction ID " + id + " does not exist."));
 
 			if (state == false) {
-				System.out.println("AQUI FALSE");
 				register.getUser().deactivateSanction();
 				register.deactivateSanction();
 			} else if (state == true) {
-				System.out.println("AQUI TRUE");
 				register.getUser().activateSanction();
 				register.ActivateSanction();
 			}

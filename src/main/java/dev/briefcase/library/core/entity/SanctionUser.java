@@ -68,12 +68,10 @@ public class SanctionUser {
 	private Date updateDate;
 	
 	public void ActivateSanction() {
-		System.out.println("AQUI TRUE SANCTIONUSER");
 		this.setActive(true);
 	}
 
 	public void deactivateSanction() {
-		System.out.println("AQUI FALSE SANCTIONUSER");
 		this.setActive(false);
 	}
 

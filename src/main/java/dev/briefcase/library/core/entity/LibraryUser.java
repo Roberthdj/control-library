@@ -88,12 +88,10 @@ public class LibraryUser {
 	/* Sanction methods */
 
 	public void activateSanction() {
-		System.out.println("AQUI TRUE USER");
 		this.setSanctioned(true);
 	}
 
 	public void deactivateSanction() {
-		System.out.println("AQUI FALSE USER");
 		this.setSanctioned(false);
 	}
 
