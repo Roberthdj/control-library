@@ -32,16 +32,6 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 		this.repositoryLoan = repositoryLoan;
 	}
 
-	private void verifyActiveLoan(Long book) {
-		List<LoanBook> register = repositoryLoan.findByIdBook(book, null);
-		for (LoanBook reg : register) {
-			if (reg.getBook().getLent().equals(true)) {
-				throw new GeneralServiceException("Book with ID " + reg.getBook().getIdBook()
-						+ " has been borrowed and cannot be deactivated or deleted.");
-			}
-		}
-	}
-
 	@Override
 	@Transactional(readOnly = true)
 	public List<LibraryBook> findAll(Pageable page) {
@@ -52,7 +42,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -66,7 +56,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -80,7 +70,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -94,7 +84,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -108,7 +98,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -122,7 +112,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -140,7 +130,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -153,7 +143,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -169,7 +159,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -192,7 +182,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -238,7 +228,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -255,15 +245,17 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 				register.logicalDelete();
 			} else if (state == true) {
 				register.logicalActivate();
-			} 
+			}
 			
+			repositoryBook.save(register);
 			return register;
+			
 		} catch (NotFoundException | ValidateFieldsException e) {
 			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -282,7 +274,21 @@ public class LibraryBookServiceImpl implements LibraryBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * Methods to use within the class
+	 */
+
+	private void verifyActiveLoan(Long book) {
+		List<LoanBook> register = repositoryLoan.findByIdBook(book, null);
+		for (LoanBook reg : register) {
+			if (reg.getBook().getLent().equals(true)) {
+				throw new GeneralServiceException("Book with ID " + reg.getBook().getIdBook()
+						+ " has been borrowed and cannot be deactivated or deleted.");
+			}
 		}
 	}
 }

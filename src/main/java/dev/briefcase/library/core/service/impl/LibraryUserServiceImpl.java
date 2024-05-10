@@ -31,21 +31,6 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 		this.repositoryLoan = repositoryLoan;
 	}
 
-	private void verifyLoanOrSanction(Long user, Boolean sanctined) {
-		List<LoanBook> register = repositoryLoan.findByIdUser(user, null);
-
-		if (sanctined.equals(true))
-			throw new GeneralServiceException(
-					"User with ID " + user + " has active sanction and cannot be deactivated or deleted.");
-
-		for (LoanBook reg : register) {
-			if (reg.getBook().getLent().equals(true)) {
-				throw new GeneralServiceException(
-						"User with ID " + user + " has active loans and cannot be deactivated or deleted.");
-			}
-		}
-	}
-
 	@Override
 	@Transactional(readOnly = true)
 	public List<LibraryUser> findAll(Pageable page) {
@@ -56,7 +41,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -70,7 +55,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -84,7 +69,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -99,7 +84,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -113,7 +98,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -127,7 +112,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -140,7 +125,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -158,7 +143,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -171,7 +156,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -187,7 +172,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -211,7 +196,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -266,7 +251,7 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -284,14 +269,16 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			} else if (state == true) {
 				register.logicalActivate();
 			}
-
+			
+			repositoryUser.save(register);
 			return register;
+			
 		} catch (NotFoundException | ValidateFieldsException e) {
 			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -310,7 +297,26 @@ public class LibraryUserServiceImpl implements LibraryUserService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * Methods to use within the class
+	 */
+
+	private void verifyLoanOrSanction(Long user, Boolean sanctined) {
+		List<LoanBook> register = repositoryLoan.findByIdUser(user, null);
+
+		if (sanctined.equals(true))
+			throw new GeneralServiceException(
+					"User with ID " + user + " has active sanction and cannot be deactivated or deleted.");
+
+		for (LoanBook reg : register) {
+			if (reg.getBook().getLent().equals(true)) {
+				throw new GeneralServiceException(
+						"User with ID " + user + " has active loans and cannot be deactivated or deleted.");
+			}
 		}
 	}
 }

@@ -31,17 +31,7 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 		this.repositoryUser = repositoryUser;
 		this.validator = validator;
 	}
-
-	private void processSanction(Long user, Boolean sanctionStatus, Boolean generateSanction) {
-		LibraryUser registerUser = repositoryUser.findById(user)
-				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
-		if (registerUser.getSanctioned().equals(true) && generateSanction.equals(true)) {
-			throw new GeneralServiceException(
-					"The user with ID " + registerUser.getIdUser() + " has already been sanctioned.");
-		}
-		registerUser.setSanctioned(sanctionStatus);
-	}
-
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SanctionUser> findAll(Pageable page) {
@@ -53,7 +43,7 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new GeneralServiceException(e.getMessage(), e);
-		}
+		}		
 	}
 
 	@Override
@@ -166,14 +156,18 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 					.orElseThrow(() -> new NotFoundException("Sanction ID " + id + " does not exist."));
 
 			if (state == false) {
+				System.out.println("AQUI FALSE");
 				register.getUser().deactivateSanction();
 				register.deactivateSanction();
 			} else if (state == true) {
+				System.out.println("AQUI TRUE");
 				register.getUser().activateSanction();
 				register.ActivateSanction();
 			}
-
+			
+			repositorySanction.save(register);			
 			return register;
+			
 		} catch (NotFoundException | ValidateFieldsException e) {
 			log.info(e.getMessage(), e);
 			throw e;
@@ -200,5 +194,19 @@ public class SanctionUserServiceImpl implements SanctionUserService {
 			log.error(e.getMessage(), e);
 			throw new GeneralServiceException(e.getMessage(),e);
 		}
+	}
+	
+	/*
+	 * Methods to use within the class
+	 */
+	
+	private void processSanction(Long user, Boolean sanctionStatus, Boolean generateSanction) {
+		LibraryUser registerUser = repositoryUser.findById(user)
+				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
+		if (registerUser.getSanctioned().equals(true) && generateSanction.equals(true)) {
+			throw new GeneralServiceException(
+					"The user with ID " + registerUser.getIdUser() + " has already been sanctioned.");
+		}
+		registerUser.setSanctioned(sanctionStatus);
 	}
 }

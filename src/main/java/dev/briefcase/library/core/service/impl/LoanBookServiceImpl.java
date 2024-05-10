@@ -36,30 +36,6 @@ public class LoanBookServiceImpl implements LoanBookService {
 		this.validator = validator;
 	}
 
-	private void verifyUser(Long user) {
-		LibraryUser registerUser = repositoryUser.findById(user)
-				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
-		if (registerUser.getSanctioned().equals(true) || registerUser.getActive().equals(false)) {
-			throw new GeneralServiceException(
-					"The user with ID " + registerUser.getIdUser() + " has been sanctioned or is not active.");
-		}
-	}
-
-	private void verifyBookAndprocessLoan(Long book, Boolean loanStatus, Boolean generateLoan) {
-		LibraryBook registerBook = repositoryBook.findById(book)
-				.orElseThrow(() -> new NotFoundException("Book ID " + book + " does not exist."));
-
-		if (registerBook.getActive().equals(false)) {
-			throw new GeneralServiceException("The book with ID " + registerBook.getIdBook() + " is not active.");
-		}
-
-		if (registerBook.getLent().equals(true) && generateLoan.equals(true)) {
-			throw new GeneralServiceException(
-					"The book with ID " + registerBook.getIdBook() + " has already been borrowed.");
-		}
-		registerBook.setLent(loanStatus);
-	}
-
 	@Override
 	@Transactional(readOnly = true)
 	public List<LoanBook> findAll(Pageable page) {
@@ -70,7 +46,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -84,7 +60,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -98,7 +74,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -111,7 +87,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -124,7 +100,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -138,10 +114,9 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
-	
 
 	@Override
 	public List<LoanBook> findByIdfAndIsbn(String idf, String isbn, Pageable page) {
@@ -152,7 +127,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -167,7 +142,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -180,7 +155,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 
 			verifyUser(loanBook.getUser().getIdUser());
 			verifyBookAndprocessLoan(loanBook.getBook().getIdBook(), true, true);
-			
+
 			loanBook.activateLoan();
 			LoanBook register = repositoryLoan.save(loanBook);
 			return register;
@@ -189,7 +164,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -231,14 +206,14 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
-	
+
 	@Override
 	@Transactional
 	public LoanBook logicalDelete(Long id, Boolean state) {
-		try {			
+		try {
 			LoanBook register = repositoryLoan.findById(id)
 					.orElseThrow(() -> new NotFoundException("Loan ID " + id + " does not exist."));
 
@@ -246,15 +221,17 @@ public class LoanBookServiceImpl implements LoanBookService {
 				register.deactivateLoan();
 			} else if (state == true) {
 				register.activateLoan();
-			} 
+			}
 			
+			repositoryLoan.save(register);
 			return register;
+			
 		} catch (NotFoundException | ValidateFieldsException e) {
 			log.info(e.getMessage(), e);
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -264,7 +241,7 @@ public class LoanBookServiceImpl implements LoanBookService {
 		try {
 			LoanBook register = repositoryLoan.findById(id)
 					.orElseThrow(() -> new NotFoundException("Loan with ID " + id + " does not exist."));
-			
+
 			verifyBookAndprocessLoan(register.getBook().getIdBook(), false, false);
 			repositoryLoan.delete(register);
 		} catch (NotFoundException | ValidateFieldsException e) {
@@ -272,7 +249,35 @@ public class LoanBookServiceImpl implements LoanBookService {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw new GeneralServiceException(e.getMessage(),e);
+			throw new GeneralServiceException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * Methods to use within the class
+	 */
+
+	private void verifyUser(Long user) {
+		LibraryUser registerUser = repositoryUser.findById(user)
+				.orElseThrow(() -> new NotFoundException("User ID " + user + " does not exist."));
+		if (registerUser.getSanctioned().equals(true) || registerUser.getActive().equals(false)) {
+			throw new GeneralServiceException(
+					"The user with ID " + registerUser.getIdUser() + " has been sanctioned or is not active.");
+		}
+	}
+
+	private void verifyBookAndprocessLoan(Long book, Boolean loanStatus, Boolean generateLoan) {
+		LibraryBook registerBook = repositoryBook.findById(book)
+				.orElseThrow(() -> new NotFoundException("Book ID " + book + " does not exist."));
+
+		if (registerBook.getActive().equals(false)) {
+			throw new GeneralServiceException("The book with ID " + registerBook.getIdBook() + " is not active.");
+		}
+
+		if (registerBook.getLent().equals(true) && generateLoan.equals(true)) {
+			throw new GeneralServiceException(
+					"The book with ID " + registerBook.getIdBook() + " has already been borrowed.");
+		}
+		registerBook.setLent(loanStatus);
 	}
 }
