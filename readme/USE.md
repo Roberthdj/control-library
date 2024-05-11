@@ -1,6 +1,6 @@
 
 ---
-# `«COMO USAR LA APLICACION»` 
+# «COMO USAR LA APLICACION»
 ---
 
 **Por ahora HOLA!**

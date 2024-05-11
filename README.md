@@ -1,6 +1,6 @@
 
 ---
-# `«CONTROL LIBRARY»`
+# «CONTROL LIBRARY»
 ---
 
 <p align="justify"> CONTROL LIBRARY es una API desarrollada con Spring Boot con la finalidad de realizar trabajo practico de programación backend, e ir ganando experiencia en el uso de las tecnologías y conceptos usados en su desarrollo.</p>
@@ -10,7 +10,7 @@
 
 ---
 
-## `INDICE`
+## INDICE
 
 * [ESTRUCTURA DEL PROYECTO](#estructura-del-proyecto)
 * [TECNOLOGIAS UTILIZADAS](#tecnologias-utilizadas)
@@ -20,7 +20,7 @@
 
 ---
 
-## `ESTRUCTURA DEL PROYECTO`
+## ESTRUCTURA DEL PROYECTO
 
 #### [Ver: estructura de la aplicación »](/readme/STRUCTURE.md)
 
@@ -28,7 +28,7 @@
 
 ---
 
-## `TECNOLOGIAS UTILIZADAS`
+## TECNOLOGIAS UTILIZADAS
 
 ||||
 |:---:|:---:|:---:|
@@ -40,9 +40,7 @@
 
 ---
 
-## `INSTRUCCIONES DE INSTALACION`
-
-#### `Eclipse`
+## INSTRUCCIONES DE INSTALACION
 
 - [Clonar el repositorio desde github.]("https://docs.github.com/es/repositories/creating-and-managing-repositories/cloning-a-repository")
 
@@ -75,7 +73,7 @@
 
 ---
 
-## `INSTRUCCIONES DE USO`
+## INSTRUCCIONES DE USO
 
 #### [Ver: como usar la aplicación »](/readme/USE.md)
 
@@ -83,7 +81,7 @@
 
 ---
 
-## `DESARROLLADO POR`
+## DESARROLLADO POR
 
 <a href="https://github.com/roberthdj" target="blank">
     <img align="center" src="https://avatars.githubusercontent.com/u/120141795?v=4" alt="roberthdj-rodriguez" height="125" width="125"/>
